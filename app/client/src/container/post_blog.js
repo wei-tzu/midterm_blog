@@ -36,8 +36,8 @@ class Post_blog extends Component {
         await axios.post("http://localhost:3001/api/putArticle", {
             id: idToBeAdded,
 		    title: title,
-		    content: author,
-		    author: content,
+		    content: content,
+		    author: author,
         });
     }
     render() {
