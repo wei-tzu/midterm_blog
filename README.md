@@ -2,7 +2,7 @@
 ## 簡介
 個人的網頁 
 ## 連結：
-
+https://github.com/wei-tzu/midterm_blog
 ## 使用/操作方式：
   Some basic Git commands are:
 ```
