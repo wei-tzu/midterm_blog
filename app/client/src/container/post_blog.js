@@ -10,14 +10,13 @@ class Post_blog extends Component {
         this.state = { data: [],
                      author: '',
                      title: '', 
-                     content: '',
-                     lastid:'' };
+                     content: ''};
     }
     componentDidMount() {
-        this.getArticleFromDb();
+        this.getArticlesFromDb();
     }
-    getArticleFromDb = async () => {
-        await fetch('http://localhost:3001/api/getArticle')
+    getArticlesFromDb = async () => {
+        await fetch('http://localhost:3001/api/getArticles')
         .then(res => { return res.json() })
         .then(res => {
             this.setState(() => ({ data: res.data }));
@@ -25,14 +24,16 @@ class Post_blog extends Component {
         .catch((err) => console.error(err));
     }
 
-    putArticleToDB = () => {
+    putArticleToDB = async () => {
         let currentIds = this.state.data.map(data => data.id);
-        let idToBeAdded = currentIds.length; 
-        ++idToBeAdded;
+        let idToBeAdded = 0;
+        while (currentIds.includes(idToBeAdded)) {
+            idToBeAdded = idToBeAdded + 1;
+        }
         let title = this.state.title
         let author = this.state.author
         let content =  this.state.content
-        axios.post("http://localhost:3001/api/putArticle", {
+        await axios.post("http://localhost:3001/api/putArticle", {
             id: idToBeAdded,
 		    title: title,
 		    content: author,
